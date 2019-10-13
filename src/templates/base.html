@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://cdn.lineicons.com/1.0.1/LineIcons.min.css">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+    <header class="navbar">
+        <section class="navbar-section">
+            <a href="/" class="btn btn-link"><i class="lni-home"></i> Inicio</a>
+            <a href="..." class="btn btn-link"><i class="lni-information"></i> Acerca de</a>
+        </section>
+        <section class="navbar-section">
+            <div class="input-group input-inline">
+                <input class="form-input" type="text" placeholder="search">
+                <button class="btn btn-primary input-group-btn">Search</button>
+            </div>
+        </section>
+    </header>
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+
+</html>

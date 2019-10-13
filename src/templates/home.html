@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}{{title}}{% endblock %}
+{% block content %}
+<div class="columns">
+    <div class="column col-12 text-center">
+        <h1>Hola {{user_name | title}}!</h1>
+    </div>
+</div>
+{% endblock %}
