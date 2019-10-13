@@ -16,10 +16,11 @@ Including another URLconf
 from django.urls import path
 
 
-from .views import blog_post_get_item, blog_post_get_all_items, blog_post_remove, blog_post_update
+from .views import blog_post_get_item, blog_post_get_all_items, blog_post_remove, blog_post_update, blog_post_create_item
 
 urlpatterns = [
     path('', blog_post_get_all_items),
+    path('create/', blog_post_create_item),
     path('details/<str:slug>/', blog_post_get_item),
     path('details/<str:slug>/edit', blog_post_update),
     path('details/<str:slug>/remove', blog_post_remove),

@@ -15,3 +15,8 @@ def home_page(request):
 def about(request):
     title = "Acerca de"
     return render(request, "about.html")
+
+
+def contact_us(request):
+    title = "Contáctanos"
+    return render(request, "contact_us.html")
