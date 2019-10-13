@@ -5,6 +5,11 @@
 <div class="columns">
     <div class="column col-12 text-center">
         <h1>Contáctanos</h1>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary input-group-btn">Enviar</button>
+        </form>
     </div>
 </div>
 {% endblock %}
