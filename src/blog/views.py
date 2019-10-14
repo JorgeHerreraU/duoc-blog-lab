@@ -2,11 +2,18 @@ from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from .models import BlogPost
+from .forms import BlogPostForm, BlogPostFormModel
 
 
 def blog_post_create_item(request):
-    context = {"form": None}
-    return render(request, 'blog/create.html', context)
+    title = "Nueva Publicación"
+    form = BlogPostFormModel(request.POST or None)
+    if form.is_valid():
+        form.save()
+        # Clean Form
+        form = BlogPostFormModel()
+    context = {"title": title, "form": form}
+    return render(request, 'blog/form.html', context)
 
 
 def blog_post_get_all_items(request):

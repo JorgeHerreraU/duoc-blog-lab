@@ -2,6 +2,16 @@ from django import forms
 
 
 class ContactForm(forms.Form):
-    nombre = forms.CharField()
-    email = forms.EmailField()
-    comentario = forms.CharField(widget=forms.Textarea)
+    nombre = forms.CharField(widget=forms.TextInput(
+        attrs={
+            'placeholder': "Nombre"
+        }
+    )
+    )
+    email = forms.EmailField(widget=forms.EmailInput(
+        attrs={
+            'placeholder': 'Email'
+        }
+    ))
+    comentario = forms.CharField(widget=forms.Textarea(
+        attrs={'placeholder': 'Escribe tu mensaje aquí'}))
