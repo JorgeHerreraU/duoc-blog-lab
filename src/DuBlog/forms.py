@@ -15,3 +15,11 @@ class ContactForm(forms.Form):
     ))
     comentario = forms.CharField(widget=forms.Textarea(
         attrs={'placeholder': 'Escribe tu mensaje aquí'}))
+
+    def clean_email(self, *args, **kwargs):
+        email = self.cleaned_data.get('email')
+        if email.endswith(".tk"):
+            raise forms.ValidationError(
+                "Email inválido, dominio no permitido")
+        print(email)
+        return email
