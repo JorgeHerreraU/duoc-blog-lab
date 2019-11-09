@@ -21,5 +21,4 @@ class ContactForm(forms.Form):
         if email.endswith(".tk"):
             raise forms.ValidationError(
                 "Email inválido, dominio no permitido")
-        print(email)
         return email
