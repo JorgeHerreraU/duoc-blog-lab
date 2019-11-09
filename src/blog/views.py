@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 
@@ -39,6 +39,7 @@ def blog_post_get_item(request, slug):
     return render(request, 'blog/details.html', context)
 
 
+@staff_member_required
 def blog_post_update(request, slug):
     # Lookup the BlogPost object
     obj = get_object_or_404(BlogPost, slug=slug)
@@ -51,7 +52,11 @@ def blog_post_update(request, slug):
     return render(request, 'blog/form.html', context)
 
 
+@staff_member_required
 def blog_post_remove(request, slug):
     obj = get_object_or_404(BlogPost, slug=slug)
+    if request.method == "POST":
+        obj.delete()
+        return redirect("/blog")
     context = {"object": obj}
     return render(request, 'blog/delete.html', context)

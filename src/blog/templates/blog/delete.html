@@ -2,8 +2,13 @@
 
 {% block content %}
 
-<h1>Remove</h1>
-<h1>{{object.title}}</h1>
-<p>{{object.content}}</p>
+<h1>Eliminar</h1>
+<p>¿Estás seguro que deseas eliminar el siguiente post?</p>
+<p>{{object.title}}</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <button class="btn btn-primary">Eliminar</button>
+</form>
 
 {% endblock %}
