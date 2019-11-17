@@ -1,0 +1,20 @@
+<div class="column col-6 col-mx-auto p-1">
+
+
+    <div class="card">
+        <div class="card-image">
+
+        </div>
+        <div class="card-header">
+            <div class="card-title h5">{{object.title|title}}</div>
+        </div>
+        <div class="card-body">
+            {{object.content|linebreaks|truncatewords:100}}
+        </div>
+        <div class="card-footer">
+            <a class="btn-link" href="{{object.get_absolute_url}}/details/">Detalles</a>
+        </div>
+    </div>
+
+
+</div>

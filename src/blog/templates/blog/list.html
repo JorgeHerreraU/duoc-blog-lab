@@ -1,11 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-
 {% for object in object_list %}
-
-<li>{{ object.title }}</li>
-
+{% include 'blog/list-cards.html' %}
 {% endfor %}
 
 {% endblock %}

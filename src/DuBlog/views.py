@@ -1,18 +1,21 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from .forms import ContactForm
+from blog.models import BlogPost
 
 
 def home_page(request):
     title = "Inicio | DUOC UC Blog"
     user_name = request.user.get_username()
+    qs = BlogPost.objects.all()[:3]
     if request.user.is_authenticated:
         context = {
             "user_name": user_name,
-            "title": title
+            "title": title,
+            "blog_list": qs
         }
     else:
-        context = {"user_name": "Anónimo"}
+        context = {"user_name": "Anónimo", "title": title}
     return render(request, "home.html", context)
 
 

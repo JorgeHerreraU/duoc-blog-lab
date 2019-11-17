@@ -12,3 +12,6 @@ class BlogPost(models.Model):
     # Slug = Short URL Label (User Experience)
     slug = models.SlugField(unique=True)
     content = models.TextField(null=True, blank=True)
+
+    def get_absolute_url(self):
+        return f"/blog/{self.slug}"
