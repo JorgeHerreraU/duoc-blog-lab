@@ -12,7 +12,7 @@ from .forms import BlogPostFormModel
 def blog_post_create_item(request):
     """Create a new post"""
     title = "Nueva Publicación"
-    form = BlogPostFormModel(request.POST or None)
+    form = BlogPostFormModel(request.POST or None, request.FILES or None)
     if form.is_valid():
         # Hookup the user to the blog post before saving
         post = form.save(commit=False)
@@ -27,7 +27,9 @@ def blog_post_create_item(request):
 
 def blog_post_get_all_items(request):
     """Returns a list of objects"""
-    qs = BlogPost.objects.all()
+    qs = BlogPost.objects.all().published()
+    if request.user.is_authenticated:
+        qs = BlogPost.objects.filter(user=request.user)
     context = {"object_list": qs}
     return render(request, 'blog/list.html', context)
 

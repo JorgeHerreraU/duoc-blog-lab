@@ -1,5 +1,4 @@
 from django import forms
-
 from .models import BlogPost
 
 
@@ -24,11 +23,18 @@ from .models import BlogPost
 class BlogPostFormModel(forms.ModelForm):
     class Meta:
         model = BlogPost
-        fields = ['title', 'slug', 'content']
+        fields = ['title', 'slug', 'image', 'content', 'publish_date']
         widgets = {
-            "title": forms.TextInput(attrs={'placeholder': 'Nombre'}),
-            "slug": forms.TextInput(attrs={'placeholder': 'Slug'}),
-            "content": forms.Textarea(attrs={'placeholder': 'Escribe tu contenido aquí'})
+            "title": forms.TextInput(attrs={'placeholder': 'Ej: Mi canción preferida'}),
+            "slug": forms.TextInput(attrs={'placeholder': 'Ej: cancion-preferida'}),
+            "content": forms.Textarea(attrs={'placeholder': 'Ej: Me gusta pneuma de tool'}),
+            "publish_date": forms.DateTimeInput(attrs={'placeholder': 'Ej: 2019-15-19 12:30:00'}),
+        }
+        labels = {
+            'title': 'Título',
+            "slug": 'URL',
+            'content': 'Contenido',
+            'publish_date': 'Fecha de publicación'
         }
 
     def clean_title(self, *args, **kwargs):

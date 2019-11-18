@@ -3,15 +3,19 @@
 
     <div class="card">
         <div class="card-image">
-
+            {% if object.image %}
+            <img src="{{object.image.url}}" class="img-responsive">
+            {% endif %}
         </div>
         <div class="card-header">
             <div class="card-title h5">{{object.title|title}}</div>
+            <div class="card-subtitle text-gray">{% if object.publish_date %}{{object.publish_date}}{% endif %}</div>
         </div>
         <div class="card-body">
             {{object.content|linebreaks|truncatewords:100}}
         </div>
         <div class="card-footer">
+            {% if not object.publish_date %} Borrador {% endif %}
             <a class="btn-link" href="{{object.get_absolute_url}}/details/">Detalles</a>
         </div>
     </div>

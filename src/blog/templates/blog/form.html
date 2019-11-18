@@ -7,10 +7,11 @@
 <div class="columns">
     <div class="column col-4">
         <h1>{{ title }}</h1>
-        <form action="" method="POST" class="form-horizontal">
+        <form action="" method="POST" class="form-horizontal" enctype="multipart/form-data">
             {% csrf_token %}
             {% for field in form.visible_fields %}
             <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                 {% if field.errors %}
                 {% render_field field class="form-input is-error" %}
                 {% for error in field.errors %}
