@@ -2,8 +2,13 @@
 
 {% block content %}
 <div class="columns p-1">
-    <div class="column col-12">
+    <div class="column col-6 col-mx-auto p-1">
         <div class="card">
+            <div class="card-image">
+                {% if object.image %}
+                <img src="{{object.image.url}}" class="img-responsive">
+                {% endif %}
+            </div>
             <div class="card-header">
                 <div class="float-right">
                     {% if request.user.is_authenticated %}

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'widget_tweaks',
+    'search',
 ]
 
 MIDDLEWARE = [

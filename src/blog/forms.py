@@ -26,12 +26,14 @@ class BlogPostFormModel(forms.ModelForm):
         fields = ['title', 'slug', 'image', 'content', 'publish_date']
         widgets = {
             "title": forms.TextInput(attrs={'placeholder': 'Ej: Mi canción preferida'}),
+            "image": forms.FileInput(),
             "slug": forms.TextInput(attrs={'placeholder': 'Ej: cancion-preferida'}),
             "content": forms.Textarea(attrs={'placeholder': 'Ej: Me gusta pneuma de tool'}),
             "publish_date": forms.DateTimeInput(attrs={'placeholder': 'Ej: 2019-15-19 12:30:00'}),
         }
         labels = {
             'title': 'Título',
+            'image': 'Imagen',
             "slug": 'URL',
             'content': 'Contenido',
             'publish_date': 'Fecha de publicación'

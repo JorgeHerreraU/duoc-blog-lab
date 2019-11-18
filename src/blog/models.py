@@ -12,10 +12,18 @@ class BlogPostQuerySet(models.QuerySet):
         # BlogPost.objects
         return self.filter(publish_date__lte=now)
 
+    def search(self, query):
+        return self.filter(title__iexact=query)
+
 
 class BlogPostManager(models.Manager):
     def get_queryset(self):
         return BlogPostQuerySet(self.model, using=self._db)
+
+    def search(self, query=None):
+        if query is None:
+            return self.get_queryset().none()
+        return self.get_queryset().published().search(query)
 
 
 class BlogPost(models.Model):

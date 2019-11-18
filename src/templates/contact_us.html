@@ -11,6 +11,7 @@
             {% csrf_token %}
             {% for field in form.visible_fields %}
             <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                 {% if field.errors %}
                 {% render_field field class="form-input is-error" %}
                 {% for error in field.errors %}
