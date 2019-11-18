@@ -1,19 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load widget_tweaks %}
+
 
 <div class="column col-4 col-mx-auto">
     <h2>Registrar usuario</h2>
 
     <form method="POST">
-        {{ form.as_p }}
         {% csrf_token %}
-        <button type="submit">Registrar</button>
+        {% for field in form %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field|add_class:'form-input' }}
+            {% for text in field %}
+            <small style="color: grey">{{ field.help_text|safe }}</small></br></br>
+            {% endfor %}
+            {% for error in field.errors %}
+            <p class="text-error">{{ error }}</p>
+            {% endfor %}
+        </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary input-group-btn">Registrar</button>
     </form>
 
     <hr />
 
     <a href="/login">Iniciar sesión</a>
 </div>
-
 {% endblock %}

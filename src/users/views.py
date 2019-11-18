@@ -2,11 +2,21 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import logout as do_logout, login as do_login, authenticate
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
-
 # Create your views here.
+
 
 def register(request):
     form = UserCreationForm()
+    print(form.fields)
+    form.fields['username'].widget.attrs.update({
+        'placeholder': 'Nombre de usuario'
+    })
+    form.fields['password1'].widget.attrs.update({
+        'placeholder': 'Ingresar contraseña'
+    })
+    form.fields['password2'].widget.attrs.update({
+        'placeholder': 'Repetir contraseña'
+    })
     if request.method == "POST":
         form = UserCreationForm(data=request.POST)
         if form.is_valid():

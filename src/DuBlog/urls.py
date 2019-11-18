@@ -32,5 +32,6 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('search/', search_blog_post),
     path('login/', login),
-    path('register/', register)
+    path('register/', register),
+    path('logout/', logout),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
