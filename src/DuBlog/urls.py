@@ -23,11 +23,14 @@ from .views import home_page, contact_us
 
 from blog.views import blog_post_create_item
 from search.views import search_blog_post
+from users.views import register, login, logout
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_page),
     path('contactanos/', contact_us),
     path('blog/', include('blog.urls')),
-    path('search/', search_blog_post)
+    path('search/', search_blog_post),
+    path('login/', login),
+    path('register/', register)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

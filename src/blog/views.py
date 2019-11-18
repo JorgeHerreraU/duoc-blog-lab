@@ -7,7 +7,6 @@ from .models import BlogPost
 from .forms import BlogPostFormModel
 
 
-@staff_member_required
 @login_required
 def blog_post_create_item(request):
     """Create a new post"""
@@ -25,6 +24,7 @@ def blog_post_create_item(request):
     return render(request, 'blog/form.html', context)
 
 
+@login_required
 def blog_post_get_all_items(request):
     """Returns a list of objects"""
     qs = BlogPost.objects.all().published()
@@ -34,6 +34,7 @@ def blog_post_get_all_items(request):
     return render(request, 'blog/list.html', context)
 
 
+@login_required
 def blog_post_get_item(request, slug):
     """Returns an specific post"""
     obj = get_object_or_404(BlogPost, slug=slug)
@@ -41,7 +42,7 @@ def blog_post_get_item(request, slug):
     return render(request, 'blog/details.html', context)
 
 
-@staff_member_required
+@login_required
 def blog_post_update(request, slug):
     # Lookup the BlogPost object
     obj = get_object_or_404(BlogPost, slug=slug)
@@ -54,7 +55,7 @@ def blog_post_update(request, slug):
     return render(request, 'blog/form.html', context)
 
 
-@staff_member_required
+@login_required
 def blog_post_remove(request, slug):
     obj = get_object_or_404(BlogPost, slug=slug)
     if request.method == "POST":

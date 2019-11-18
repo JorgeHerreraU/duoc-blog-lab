@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import ContactForm
 from blog.models import BlogPost
 
@@ -14,9 +14,10 @@ def home_page(request):
             "title": title,
             "blog_list": qs
         }
+        return render(request, "home.html", context)
     else:
         context = {"user_name": "Anónimo", "title": title}
-    return render(request, "home.html", context)
+        return redirect('/login')
 
 
 def about(request):
