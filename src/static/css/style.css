@@ -11,10 +11,27 @@
     background: #3c4dae;
 }
 
+.btn-indigo:focus {
+    background: #3c4dae;
+}
+
 .nav-shadow {
 box-shadow: 0 3px 5px -1px rgba(0,0,0,.2),0 6px 10px 0 rgba(0,0,0,.14),0 1px 18px 0 rgba(0,0,0,.12);
 }
 
 .navbar-section {
     padding: 7px;
+}
+
+.pull-right {
+    right: 0!important;
+    left: auto!important;
+    margin-top: 10px;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }

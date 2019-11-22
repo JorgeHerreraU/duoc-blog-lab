@@ -5,8 +5,8 @@
 {% load widget_tweaks %}
 
 <div class="columns">
-    <div class="column col-4">
-        <h1>{{ title }}</h1>
+    <div class="column col-4 col-mx-auto">
+        <h2 class="text-center">{{ title }}</h2>
         <form action="" method="POST" class="form-horizontal">
             {% csrf_token %}
             {% for field in form.visible_fields %}

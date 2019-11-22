@@ -1,6 +1,8 @@
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
+# Query library for complex search
+from django.db.models import Q
 # Create your models here.
 
 User = settings.AUTH_USER_MODEL
@@ -13,7 +15,9 @@ class BlogPostQuerySet(models.QuerySet):
         return self.filter(publish_date__lte=now)
 
     def search(self, query):
-        return self.filter(title__iexact=query)
+        lookup = (Q(title__icontains=query) | Q(
+            content__icontains=query) | Q(user__first_name__icontains=query) | Q(user__username__icontains=query))
+        return self.filter(lookup)
 
 
 class BlogPostManager(models.Manager):

@@ -19,7 +19,7 @@ from django.conf import settings
 
 from django.conf.urls.static import static
 
-from .views import home_page, contact_us
+from .views import home_page, contact_us, about
 
 from blog.views import blog_post_create_item
 from search.views import search_blog_post
@@ -34,4 +34,5 @@ urlpatterns = [
     path('login/', login),
     path('register/', register),
     path('logout/', logout),
+    path('about/', about)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

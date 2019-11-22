@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="column col-6 col-mx-auto p-2">
+    <a href="/blog/create/" class="btn btn-success"><i class="lni-plus"></i> Crear Publicación</a>
+</div>
 {% for object in object_list %}
 {% include 'blog/list-cards.html' %}
 {% endfor %}
