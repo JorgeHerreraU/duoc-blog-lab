@@ -1,9 +1,12 @@
 from django.shortcuts import render
 from blog.models import BlogPost
 from .models import SearchQuery
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 
 
+@login_required
 def search_blog_post(request):
     # Default will be None
     query = request.GET.get('q', None)

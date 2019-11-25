@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load widget_tweaks %}
+<div class="column col-4 col-mx-auto">
+    <h2>Modificar Perfil</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field|add_class:'form-input' }}
+            {% for text in field %}
+            <small style="color: grey">{{ field.help_text|safe }}</small></br></br>
+            {% endfor %}
+            {% for error in field.errors %}
+            <p class="text-error">{{ error }}</p>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-indigo">Guardar cambios</button>
+    </form>
+</div>
+
+{% endblock %}
