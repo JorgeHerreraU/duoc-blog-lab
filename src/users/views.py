@@ -1,18 +1,21 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout as do_logout, login as do_login, authenticate, update_session_auth_hash
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm, UserChangeForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, UserChangeForm
 from django.contrib.auth.decorators import login_required
-from .forms import UserProfileForm
+from .forms import UserProfileForm, RegistrationForm
 
 
 # Create your views here.
 
 
 def register(request):
-    form = UserCreationForm()
+    form = RegistrationForm()
     form.fields['username'].widget.attrs.update({
         'placeholder': 'Nombre de usuario'
+    })
+    form.fields['email'].widget.attrs.update({
+        'placeholder': 'Correo electrónico'
     })
     form.fields['password1'].widget.attrs.update({
         'placeholder': 'Ingresar contraseña'
@@ -21,7 +24,7 @@ def register(request):
         'placeholder': 'Repetir contraseña'
     })
     if request.method == "POST":
-        form = UserCreationForm(data=request.POST)
+        form = RegistrationForm(data=request.POST)
         if form.is_valid():
             user = form.save()
             if user is not None:

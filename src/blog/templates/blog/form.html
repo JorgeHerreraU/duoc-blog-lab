@@ -4,27 +4,30 @@
 {% block content %}
 {% load widget_tweaks %}
 
-<div class="columns">
-    <div class="column col-12">
-        <h1>{{ title }}</h1>
-        <form action="" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {% for field in form.visible_fields %}
-            <div class="form-group">
-                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                {% if field.errors %}
-                {% render_field field class="form-input is-error" %}
-                {% for error in field.errors %}
-                <p class="form-input-hint">{{ error }}</p>
-                {% endfor %}
-                {% else %}
-                {% render_field field class="form-input" %}
-                {% endif %}
-            </div>
-            {% endfor %}
+<div class="column col-4 col-mx-auto">
 
-            <button type="submit" class="btn btn-primary input-group-btn">Enviar</button>
-        </form>
+    <div class="columns">
+        <div class="column col-12">
+            <h1>{{ title }}</h1>
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for field in form.visible_fields %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {% if field.errors %}
+                    {% render_field field class="form-input is-error" %}
+                    {% for error in field.errors %}
+                    <p class="form-input-hint">{{ error }}</p>
+                    {% endfor %}
+                    {% else %}
+                    {% render_field field class="form-input" %}
+                    {% endif %}
+                </div>
+                {% endfor %}
+
+                <button type="submit" class="btn btn-primary input-group-btn">Enviar</button>
+            </form>
+        </div>
     </div>
 </div>
 {% endblock %}
