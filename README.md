@@ -12,7 +12,7 @@ $pip install -r requirements.txt
 Generar migraciones
 
 ```bash
-$pip install -r requirements.txt
+$py manage.py makemigrations
 ```
 
 Crear usuario admin

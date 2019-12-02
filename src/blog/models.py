@@ -22,6 +22,8 @@ class BlogPostQuerySet(models.QuerySet):
 
 class BlogPostManager(models.Manager):
     def get_queryset(self):
+        # Calling custom QuerySet methods from the manager
+        # See more at django docs https://docs.djangoproject.com/en/2.2/topics/db/managers/
         return BlogPostQuerySet(self.model, using=self._db)
 
     def search(self, query=None):
@@ -42,6 +44,7 @@ class BlogPost(models.Model):
     timestamp = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now=True)
 
+    # This line is very important as it maps the objects to the default manager
     objects = BlogPostManager()
 
     # Ordering Newest to Oldest

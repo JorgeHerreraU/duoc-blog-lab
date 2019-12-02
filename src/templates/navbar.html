@@ -15,18 +15,19 @@
     </section>
     <section class="navbar-section">
         {%if user.is_authenticated%}
-        <div class="input-group input-line">
-            <span><i class="lni-user text-light"></i></span>
-            <span class="text-light">Hola, {{user.get_username}} </span>
-            <div class="dropdown">
-                <a href="#" class="btn btn-indigo dropdown-toggle" tabindex="0"> <i
-                        class="lni-chevron-down text-white"></i></a>
-                <ul class="menu pull-right">
-                    <li><a href="/edit_profile/"><i class="lni-cog"></i> Mi Perfil</a></li>
-                    <li><a href="/change_password/"><i class="lni-key"></i> Cambiar contraseña</a></li>
-                    <li><a href="/logout/"><i class="lni-shift-left"></i> Logout</a></li>
-                </ul>
-            </div>
+        {% if request.user.is_superuser %}
+        <a href="/admin/" class="btn btn-indigo"><i class="lni-construction-hammer"></i> Consola de administrador</a>
+        {% endif %}
+        <div class="divider-vert"></div>
+        <span class="text-light"><i class="lni-user text-light"></i> Hola, {{user.get_username}} </span>
+        <div class="dropdown">
+            <a href="#" class="btn btn-indigo dropdown-toggle" tabindex="0"> <i
+                    class="lni-chevron-down text-white"></i></a>
+            <ul class="menu pull-right">
+                <li><a href="/edit_profile/"><i class="lni-cog"></i> Mi Perfil</a></li>
+                <li><a href="/change_password/"><i class="lni-key"></i> Cambiar contraseña</a></li>
+                <li><a href="/logout/"><i class="lni-shift-left"></i> Logout</a></li>
+            </ul>
         </div>
     </section>
     {% endif %}
