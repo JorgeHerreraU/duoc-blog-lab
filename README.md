@@ -12,11 +12,17 @@ $pip install -r requirements.txt
 Generar migraciones
 
 ```bash
-$py manage.py makemigrations
+$python manage.py makemigrations
 ```
 
 Crear usuario admin
 
 ```bash
-$py manage.py createsuperuser
+$python manage.py createsuperuser
+```
+
+## Ejecutar
+
+```bash
+$python manage.py runserver
 ```
