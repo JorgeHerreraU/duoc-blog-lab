@@ -34,6 +34,7 @@ router.register(r'groups', api_views.GroupViewSet)
 router.register(r'blogposts', api_views.BlogPostViewSet)
 
 urlpatterns = [
+    path('api/v1/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
     path('', home_page),
