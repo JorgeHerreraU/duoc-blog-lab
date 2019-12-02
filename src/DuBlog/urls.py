@@ -25,8 +25,17 @@ from .views import home_page, contact_us, about
 from blog.views import blog_post_create_item
 from search.views import search_blog_post
 from users.views import register, login, logout, edit_profile, change_password
+from rest_framework import routers
+from api import views as api_views
+
+router = routers.DefaultRouter()
+router.register(r'users', api_views.UserViewSet)
+router.register(r'groups', api_views.GroupViewSet)
+router.register(r'blogposts', api_views.BlogPostViewSet)
 
 urlpatterns = [
+    path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
     path('', home_page),
     path('contactanos/', contact_us),
@@ -59,4 +68,5 @@ urlpatterns = [
              template_name='users/password_reset_complete.html'
          ),
          name='password_reset_complete'),
+    re_path(r'^api-auth/', include('rest_framework.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
