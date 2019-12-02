@@ -20,6 +20,8 @@ def blog_post_create_item(request):
         post.save()
         # Clean form once saved
         form = BlogPostFormModel()
+        # Redirect to blog posts
+        return redirect("/blog")
     context = {"title": title, "form": form}
     return render(request, 'blog/form.html', context)
 
@@ -51,7 +53,8 @@ def blog_post_update(request, slug):
     # Save the new information
     if form.is_valid():
         form.save()
-    context = {"form": form, "title": f'Actualizar {obj.title}'}
+    context = {"form": form, "title": f'Actualizar',
+               "post_title": obj.title}
     return render(request, 'blog/form.html', context)
 
 
