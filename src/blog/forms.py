@@ -1,22 +1,21 @@
 from django import forms
 from .models import BlogPost
+from flatpickr import DateTimePickerInput
 
 
 class BlogPostFormModel(forms.ModelForm):
     class Meta:
         model = BlogPost
-        fields = ['title', 'slug', 'image', 'content', 'publish_date']
+        fields = ['title', 'image', 'content', 'publish_date']
         widgets = {
             "title": forms.TextInput(attrs={'placeholder': 'Titulo de la publicación'}),
             "image": forms.FileInput(),
-            "slug": forms.TextInput(attrs={'placeholder': 'URL para la publicación'}),
             "content": forms.Textarea(attrs={'placeholder': 'Ingresa aquí el contenido de la publicación'}),
-            "publish_date": forms.DateTimeInput(attrs={'placeholder': 'Formato: YYYY-MM-DD HH:MM:SS'}),
+            "publish_date": DateTimePickerInput(),
         }
         labels = {
             'title': 'Título',
             'image': 'Imagen',
-            "slug": 'URL',
             'content': 'Contenido',
             'publish_date': 'Fecha de publicación'
         }

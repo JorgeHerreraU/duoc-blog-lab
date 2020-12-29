@@ -1,22 +1,72 @@
-<div class="column col-6 col-mx-auto p-1">
+<div class="column col-4 col-mx-auto p-1">
 
-
+    {{ settings }}
     <div class="card">
+        <div class="card-header" style="display: inline-flex; align-items: center; vertical-align: middle">
+            <figure class="avatar avatar-xl">
+                <img src="/media/{{ object.user.profile_picture }}" alt="...">
+            </figure>
+            <span style="margin-left: 15px; font-size: 20px">{{ object.user|title }}</span>
+        </div>
         <div class="card-image">
             {% if object.image %}
-            <img src="{{object.image.url}}" class="img-responsive">
+                <img src="{{ object.image.url }}" class="img-responsive">
             {% endif %}
         </div>
         <div class="card-header">
-            <div class="card-title h5">{{object.title|title}}</div>
-            <div class="card-subtitle text-gray">{% if object.publish_date %}{{object.publish_date}}{% endif %}</div>
+            <div class="card-title h5">{{ object.title|title }}</div>
+            <div class="card-subtitle text-gray">{% if object.publish_date %}{{ object.publish_date }}{% endif %}</div>
         </div>
         <div class="card-body">
-            {{object.content|linebreaks|truncatewords:100}}
+            <div id="half-{{ object.get_slug }}">{{ object.content|linebreaks|truncatewords:100 }}
+                {% if object.content|length > 100 %}
+                <a href="javascript:void(0)" onclick="showContent('{{ object.get_slug }}')">leer más
+                </a>
+                {% endif %}
+            </div>
+            <div id="full-{{ object.get_slug }}" style="display: none;">{{ object.content|linebreaks }}</div>
         </div>
+        <div class="divider text-center"></div>
+
         <div class="card-footer">
-            {% if not object.publish_date %} Borrador {% endif %}
-            <a class="btn-link" href="{{object.get_absolute_url}}/details/">Detalles</a>
+            <div class="columns">
+                <div class="column col-12">
+                    {% if not object.publish_date %} Borrador {% endif %}
+                    <div>
+                        <button onclick="reaction('{{ object.get_slug }}', 'upvote')"
+                                class="btn btn-link lni lni-thumbs-up"></button>
+                        <small id="upvote-{{ object.get_slug }}">{{ object.upvote|default_if_none:0 }}</small>
+                        <button onclick="reaction('{{ object.get_slug }}', 'downvote')"
+                                class="btn btn-link lni lni-thumbs-down"></button>
+                        <small id="downvote-{{ object.get_slug }}">{{ object.downvote|default_if_none:0 }}</small>
+                        <small style="margin-left: 10px">Comentarios: 500</small>
+                    </div>
+                </div>
+            </div>
+            <div class="divider text-center"></div>
+
+            <div class="columns">
+                <button class="btn btn-primary" style="width: 100%; border-radius: 5px">Comentarios</button>
+            </div>
+            <div class="divider text-center"></div>
+
+            <div class="columns" id="comments">
+                <div class="column col-12">
+                    <figure class="avatar avatar-sm">
+                        <img src="/media/{{ object.user.profile_picture }}" alt="...">
+                    </figure>
+                    <span style="margin-left: 8px; font-size: 16px">{{ object.user|title }}</span>
+                    <p style="font-size: 14px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A deleniti dignissimos eos excepturi, impedit inventore iure modi natus omnis, porro repudiandae tempora veritatis voluptates? Amet exercitationem illo placeat quam unde!. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusantium, aperiam at cum ea ex exercitationem fugiat ipsam iste laboriosam libero nemo officiis placeat tempore vel veritatis voluptate voluptatibus. Fuga. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid consequuntur, deleniti enim eos error esse est facilis fugiat ipsa iste maiores mollitia necessitatibus officia quae quam quasi quos rerum voluptatum.</p>
+                </div>
+                <div class="column col-12 divider"></div>
+                <div class="column col-12">
+                    <figure class="avatar avatar-sm">
+                        <img src="/media/{{ object.user.profile_picture }}" alt="...">
+                    </figure>
+                    <span style="margin-left: 8px; font-size: 16px">{{ object.user|title }}</span>
+                    <p style="font-size: 14px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A deleniti dignissimos eos excepturi, impedit inventore iure modi natus omnis, porro repudiandae tempora veritatis voluptates? Amet exercitationem illo placeat quam unde!. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusantium, aperiam at cum ea ex exercitationem fugiat ipsam iste laboriosam libero nemo officiis placeat tempore vel veritatis voluptate voluptatibus. Fuga. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid consequuntur, deleniti enim eos error esse est facilis fugiat ipsa iste maiores mollitia necessitatibus officia quae quam quasi quos rerum voluptatum.</p>
+                </div>
+            </div>
         </div>
     </div>
 

@@ -1,7 +1,9 @@
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group
 from rest_framework import viewsets
 from .serializers import UserSerializer, GroupSerializer, BlogSerializer
 from blog.models import BlogPost
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 class UserViewSet(viewsets.ModelViewSet):

@@ -14,6 +14,9 @@ def register(request):
     form.fields['username'].widget.attrs.update({
         'placeholder': 'Nombre de usuario'
     })
+    form.fields['profile_picture'].widget.attrs.update({
+        'placeholder': 'Foto de perfil'
+    })
     form.fields['email'].widget.attrs.update({
         'placeholder': 'Correo electrónico'
     })
@@ -24,8 +27,9 @@ def register(request):
         'placeholder': 'Repetir contraseña'
     })
     if request.method == "POST":
-        form = RegistrationForm(data=request.POST)
+        form = RegistrationForm(request.POST, request.FILES)
         if form.is_valid():
+            print(form)
             user = form.save()
             if user is not None:
                 do_login(request, user)
@@ -44,14 +48,15 @@ def login(request):
             if user is not None:
                 do_login(request, user)
                 return redirect('/')
+            else:
+                form = AuthenticationForm()
     return render(request, "users/login.html", {'form': form})
 
 
 @login_required
 def edit_profile(request):
     if request.method == 'POST':
-        form = UserProfileForm(
-            instance=request.user, data=request.POST)
+        form = UserProfileForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
             return render(request, "users/profile.html", {'form': form})

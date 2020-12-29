@@ -44,7 +44,10 @@ INSTALLED_APPS = [
     'search',
     'users',
     'rest_framework',
+    'flatpickr'
 ]
+
+AUTH_USER_MODEL = 'users.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

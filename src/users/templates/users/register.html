@@ -1,32 +1,38 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% load widget_tweaks %}
+    {% load widget_tweaks %}
 
 
-<div class="column col-4 col-mx-auto">
-    <h2>Registrar usuario</h2>
+    <div class="column col-4 col-mx-auto">
+        <h2>Registrar usuario</h2>
 
-    <form method="POST">
-        {% csrf_token %}
-        {% for field in form %}
-        <div class="form-group">
-            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-            {{ field|add_class:'form-input' }}
-            {% for text in field %}
-            <small style="color: grey">{{ field.help_text|safe }}</small></br></br>
+        <form method="POST" enctype='multipart/form-data'>
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field|add_class:'form-input' }}
+                    {% for text in field %}
+                    {# Django will produce <br> lines for the gender field #}
+                        {% if field.name != "gender" %}
+                        <small style="color: grey">{{ field.help_text|safe }}</small></br></br>
+                        {% endif %}
+                    {% endfor %}
+                    {% for error in field.errors %}
+                        <p class="text-error">{{ error }}</p>
+                    {% endfor %}
+                </div>
             {% endfor %}
-            {% for error in field.errors %}
-            <p class="text-error">{{ error }}</p>
-            {% endfor %}
-        </div>
-        {% endfor %}
 
-        <button type="submit" class="btn btn-primary input-group-btn">Registrar</button>
-    </form>
+            <button type="submit" class="btn btn-primary input-group-btn">Registrar</button>
+        </form>
 
-    <hr />
+        <hr/>
 
-    <a href="/login">Iniciar sesión</a>
-</div>
+        <a href="/login">Iniciar sesión</a>
+
+    </div>
+
+    <br><br>
 {% endblock %}

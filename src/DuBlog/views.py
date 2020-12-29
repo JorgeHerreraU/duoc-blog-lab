@@ -1,11 +1,10 @@
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import ContactForm
 from blog.models import BlogPost
 
 
 def home_page(request):
-    title = "Inicio | DUOC UC Blog"
+    title = "Inicio"
     user_name = request.user.get_username()
     qs = BlogPost.objects.all()[:3]
     if request.user.is_authenticated:
@@ -16,7 +15,6 @@ def home_page(request):
         }
         return render(request, "home.html", context)
     else:
-        context = {"user_name": "Anónimo", "title": title}
         return redirect('/login')
 
 

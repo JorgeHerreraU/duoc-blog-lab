@@ -5,6 +5,15 @@
 <div class="column col-4 col-mx-auto">
     <h2>Iniciar sesión</h2>
 
+
+    {% if form.errors %}
+        <div class="toast" style="background: #ff3336; border: none; border-radius: 5px">
+            <button class="btn btn-clear float-right" onclick="this.parentNode.remove()"></button>
+            <p>Nombre de usuario y/o contraseña incorrectos</p>
+        </div>
+    {% endif %}
+
+
     <form method="POST">
         <div class="form-group">
             {% csrf_token %}
@@ -17,7 +26,7 @@
                 <input class="form-input" type="password" placeholder="Ingesar contraseña" name="password"
                     id="id_password">
             </div>
-            <button type="submit" class="btn btn-primary input-group-btn">Login</button>
+            <button type="submit" class="btn btn-primary input-group-btn">Iniciar Sesión</button>
         </div>
     </form>
 

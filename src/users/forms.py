@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class RegistrationForm(UserCreationForm):
@@ -8,11 +10,15 @@ class RegistrationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ('username', 'profile_picture', 'email', 'gender', 'password1', 'password2')
+        labels = {
+            'profile_picture': 'Foto de Perfil',
+            'gender': 'Sexo'
+        }
 
 
 class UserProfileForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'first_name', 'last_name')
+        fields = ('username', 'profile_picture', 'email', 'first_name', 'last_name')

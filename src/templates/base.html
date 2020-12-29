@@ -20,5 +20,34 @@
         {% endblock %}
     </div>
 </body>
+{%  block javascript %}
+    <script>
+        reaction = async (slug, vote) => {
+            const url = `/blog/${slug}/reaction`;
+            const res = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({vote: vote})
+            });
+            const data = await res.json();
+            // Set upvotes and downvotes
+            document.getElementById(`upvote-${slug}`).textContent = data['upvotes'] == null ? 0 : data['upvotes'];
+            document.getElementById(`downvote-${slug}`).textContent = data['downvotes'] == null ? 0 : data['downvotes'];
+        }
+
+        showContent = slug => {
+            console.log(slug);
+            document.getElementById(`half-${slug}`).style.display = 'none';
+            document.getElementById(`full-${slug}`).style.display = 'block';
+        }
+        toggleComments = async (slug) => {
+            const commentBox = document.getElementById(`commentbox-${slug}`);
+            commentBox.style.display = 'block';
+
+        }
+    </script>
+{% endblock javascript %}
 
 </html>

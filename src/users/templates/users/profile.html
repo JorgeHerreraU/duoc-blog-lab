@@ -4,7 +4,7 @@
 {% load widget_tweaks %}
 <div class="column col-4 col-mx-auto">
     <h2>Modificar Perfil</h2>
-    <form method="post">
+    <form method="POST" enctype='multipart/form-data'>
         {% csrf_token %}
         {% for field in form %}
         <div class="form-group">

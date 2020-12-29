@@ -1,9 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.admin.views.decorators import staff_member_required
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 # Create your views here.
-from .models import BlogPost
+from .models import BlogPost, BlogPostUserReaction, BlogPostComment
 from .forms import BlogPostFormModel
 
 
@@ -66,3 +68,26 @@ def blog_post_remove(request, slug):
         return redirect("/blog")
     context = {"object": obj}
     return render(request, 'blog/delete.html', context)
+
+
+@login_required
+@csrf_exempt
+def blog_post_reaction(request, slug):
+    post = get_object_or_404(BlogPost, slug=slug)
+    if request.is_ajax and request.method == "POST":
+        reaction = json.loads(request.body)['vote']
+        BlogPostUserReaction.objects.filter(blog_post=post, user=request.user).delete()
+        new_user_reaction = BlogPostUserReaction(blog_post=post, user=request.user)
+        if reaction == "upvote":
+            new_user_reaction.upvote = 1
+        if reaction == "downvote":
+            new_user_reaction.downvote = 1
+        if any((new_user_reaction.upvote, new_user_reaction.downvote)):
+            new_user_reaction.save()
+    return JsonResponse({'slug': slug, 'upvotes': post.upvote, 'downvotes': post.downvote})
+
+
+def blog_post_get_comments(request, slug):
+    post = get_object_or_404(BlogPost, slug=slug)
+    comments = BlogPostComment.objects.filter(blog_post=post)
+
