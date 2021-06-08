@@ -9,7 +9,7 @@ djangorestframework==3.12.2
 docopt==0.6.2
 idna==2.10
 packaging==20.8
-Pillow==8.0.1
+Pillow==8.2.0
 pip-upgrader==1.4.15
 pycodestyle==2.6.0
 pyparsing==2.4.7
